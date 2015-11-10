@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<h2> Enjoying filling in the details: </h2>
+{{ wtf.quick_form(form) }}
+
+{% endblock %}

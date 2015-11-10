@@ -1,0 +1,61 @@
+{% extends "bootstrap/base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>LL's Massive Blog</title>
+</head>
+	
+<body> 
+	
+<h1> LL Cool J's Massive Blog</h1> 
+
+
+{% block navbar %}
+	<div class="navbar navbar-inverse" role="navigation">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	     		<a class="navbar-brand" href="/">Blog</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav">
+	               <li><a href="/">About</a></li>
+	               <li><a href="/">Jobs</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+{% endblock %}
+
+<!-- Important thing to remember is that need to leave empty block for child templates to fill in.
+If want to add child stuff, but keep base, user {{super}}
+Will completely replace parent block with child block by default if have stuff in child template -->
+
+{% block content %}
+	{% block page_content %}
+	{% endblock %}
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
