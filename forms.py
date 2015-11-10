@@ -11,11 +11,13 @@ class Entry(Form):
 	country = SelectField("Country of birth: ", choices = country_choices, default = [1])
 	
 	
-	blog_post = TextAreaField("Blog entry: ")
-	loadedFile = FileField("Load file here")
+	blog_post = TextAreaField("Blog entry: ")	
 	temperature = DecimalField("What is the temp?")
 	fruits = SelectMultipleField("Which fruits fo you like: ", choices = fruit_choices, default = [1])
-	date = DateField("Date")
-	
+	blog_date = DateField("Date")
+
 	submit = SubmitField("Submit")
 
+
+
+# loadedFile = FileField("Load file here")
