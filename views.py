@@ -17,6 +17,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:dog@localhost/blog'
 @app.route('/', methods = ['GET', 'POST'])
 def index():
 	entry = Entry()
+	
+	# newUser = User(name = entry.name.data, education = entry.education.data)
 
 	if request.method == 'POST':
 		existing_user = User.query.filter_by(name=entry.name.data).first()
@@ -28,6 +30,7 @@ def index():
 			return render_template('blog.html')
 
 		else:
+
 			newUser = User(name = entry.name.data, education = entry.education.data)
 			db.session.add(newUser)	
 			db.session.commit()
