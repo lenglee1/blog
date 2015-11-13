@@ -19,17 +19,28 @@ def index():
 	entry = Entry()
 
 	if request.method == 'POST':
-		newUser = User(name = entry.name.data, education = entry.education.data)
-		db.session.add(newUser)	
-		db.session.commit()
-		newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = newUser.user_id)
-		db.session.add(newAnswer)
-		db.session.commit()
+		existing_user = User.query.filter_by(name=entry.name.data).first()
+		if existing_user:
+			newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = existing_user.user_id)
+			db.session.add(newAnswer)
+			db.session.commit()
 
-		return render_template('blog.html')
+			return render_template('blog.html')
+
+		else:
+			newUser = User(name = entry.name.data, education = entry.education.data)
+			db.session.add(newUser)	
+			db.session.commit()
+			newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = newUser.user_id)
+			db.session.add(newAnswer)
+			db.session.commit()
+
+			return render_template('blog.html')
 
 	elif request.method == 'GET':
 		return render_template('index.html', form = entry)
+
+
 
 @app.route('/testdb')
 def testdb():
