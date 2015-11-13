@@ -17,16 +17,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:dog@localhost/blog'
 @app.route('/', methods = ['GET', 'POST'])
 def index():
 	entry = Entry()
+	dbObject = User.query.filter_by(name=entry.name.data).first()
+	newUser = User(name = entry.name.data, education = entry.education.data)
 
 	if request.method == 'POST':
-		newUser = User(name = entry.name.data, education = entry.education.data)
-		db.session.add(newUser)	
-		db.session.commit()
-		newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = newUser.user_id)
-		db.session.add(newAnswer)
-		db.session.commit()
+		if dbObject.name == entry.name.data:
+			newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = dbObject.user_id)
+			db.session.add(newAnswer)
+			db.session.commit()
 
-		return render_template('blog.html')
+			return render_template('blog.html')
+
+		else:
+			
+			db.session.add(newUser)	
+			db.session.commit()
+			newAnswer = Answer(blog_post = entry.blog_post.data, temperature = entry.temperature.data, user_id = newUser.user_id)
+			db.session.add(newAnswer)
+			db.session.commit()
+
+			return render_template('blog.html')
 
 	elif request.method == 'GET':
 		return render_template('index.html', form = entry)
