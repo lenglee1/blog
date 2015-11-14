@@ -27,10 +27,9 @@ def index():
 			db.session.add(newAnswer)
 			db.session.commit()
 
-			return render_template('blog.html')
+			return redirect(url_for('show'))
 
 		else:
-
 			newUser = User(name = entry.name.data, education = entry.education.data)
 			db.session.add(newUser)	
 			db.session.commit()
@@ -38,11 +37,19 @@ def index():
 			db.session.add(newAnswer)
 			db.session.commit()
 
-			return render_template('blog.html')
+			return redirect(url_for('show'))
 
 	elif request.method == 'GET':
 		return render_template('index.html', form = entry)
 
+
+@app.route('/show')
+def show():
+	all_users_answers = User.query.join(Answer, User.user_id == Answer.user_id).add_columns(User.name, User.education, Answer.blog_post, Answer.temperature).all()
+
+
+	
+	return render_template('show.html', object = all_users_answers)
 
 
 @app.route('/testdb')

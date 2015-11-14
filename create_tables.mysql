@@ -24,3 +24,10 @@ user_id INT NOT NULL
 ALTER TABLE answers ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 
 
+##########################################################################
+
+
+SELECT users.user_id, users.name, users.education, answers.blog_post, answers.temperature
+FROM users
+INNER JOIN answers
+ON users.user_id = answers.user_id;
