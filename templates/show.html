@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> this is the show page </h1>
+
+<ul>
+	{% for item in object %}
+		<li><b> {{ item.name }} </b></li>
+		<li> {{ item.education }} </li>
+		<li> {{ item.blog_post }} </li>
+		<li> {{ item.temperature }} </li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
