@@ -45,7 +45,7 @@ def index():
 
 @app.route('/show')
 def show():
-	all_users_answers = User.query.join(Answer, User.user_id == Answer.user_id).add_columns(User.name, User.education, Answer.blog_post, Answer.temperature).all()
+	all_users_answers = User.query.join(Answer, User.user_id == Answer.user_id).add_columns(User.name, User.education, Answer.blog_post, Answer.temperature).order_by(Answer.answers_id).all()
 
 
 	
